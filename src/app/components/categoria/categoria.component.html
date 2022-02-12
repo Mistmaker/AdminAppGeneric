@@ -1,0 +1,59 @@
+<div class="card text-dark mt-3">
+    <div class="card-header bg-transparent">
+        <h5 class="card-title">Categoria</h5>
+        <p class="card-text">Mantenimiento de categorias</p>
+    </div>
+    <div class="card-body">
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-primary btn-sm" [routerLink]="['/categorias']">
+                <i class="fas fa-long-arrow-alt-left"></i> Regresar </button>
+        </div>
+
+        <form class="mt-1" (ngSubmit)="f.form.valid && guardar( f )" #f="ngForm">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="form-label">Nombre:</label>
+                    <div class="input-group mb-3">
+                        <input type="tel" class="form-control" [(ngModel)]="categoria.nombre" name="nombre" maxlength="200" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Descripción:</label>
+                        <textarea name="descripcion" class="form-control" [(ngModel)]="categoria.descripcion" name="descripcion" rows="5" placeholder="Escriba acerca de esta categoría"></textarea>
+                        <!-- <input type="text" class="form-control" [(ngModel)]="categoria.descripcion" name="descripcion" placeholder="Escriba acerca de esta categoría" required> -->
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagen:</label>
+                        <input class="form-control" (change)="cargaArchivo($event)" type="file" name="file1" id="formFile">
+                        <div class="d-grid gap-2">
+                            <label *ngIf="cargando" class="btn btn-primary">Cargando...</label>
+                            <!-- <label *ngIf="cargado" class="btn btn-success"> {{ nombreArchivo }} Cargado!!!</label> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img [src]="categoria.imagen" style="width: 400px;" alt="">
+                </div>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button class="btn btn-primary w-50" [disabled]="f.form.invalid" type="submit">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <button class="btn btn-danger w-50" type="button" *ngIf="categoria.id" (click)="eliminarCategoria()">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>
